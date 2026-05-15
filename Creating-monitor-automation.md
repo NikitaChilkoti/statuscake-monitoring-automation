@@ -1,6 +1,4 @@
-# 03 - Create Monitor Automation
-
-## Context
+## Create Monitor Automation
 
 Most of the setup preparations till this point are done, including,
 * API token
@@ -26,7 +24,7 @@ That gets repetitive. And repetitive is boring, right?
 
 ---
 
-# So, what's the approach?
+## So, what's the approach?
 
 The script will:
 
@@ -38,7 +36,7 @@ Simple idea.
 
 ---
 
-# Step 1 - Create Script
+## Step 1 - Create Script
 
 Inside the `scripts/` directory:
 
@@ -54,7 +52,7 @@ nano create-monitor.sh
 
 ---
 
-# Step 2 - Add Script Content
+## Step 2 - Add Script Content
 
 ```
 #!/bin/bash
@@ -71,13 +69,13 @@ curl -X POST "$API_URL" \
 
 ---
 
-# What This Script Does
+### What This Script Does
 
 This sends a request to StatusCake saying:
 
 ```
-“Create a monitor called production-nginx-monitor
-and check the website every 5 minutes.”
+Create a monitor called production-nginx-monitor
+and check the website every 5 minutes.
 ```
 
 That’s it.
@@ -87,7 +85,7 @@ that small API request replaces an entire manual setup flow.
 
 ---
 
-# Step 3 - Make Script Executable
+## Step 3 - Make Script Executable
 
 ```
 chmod +x create-monitor.sh
@@ -100,7 +98,7 @@ Without this:
 
 ---
 
-# Step 4 - Run the Script
+## Step 4 - Run the Script
 
 ```
 ./create-monitor.sh
@@ -108,7 +106,7 @@ Without this:
 
 ---
 
-# Expected Result
+### Expected Result
 
 If everything works:
 
@@ -133,3 +131,28 @@ the workflow becomes:
 * scalable
 
 And this is how many operational tools work.
+
+## Possible Issues
+
+### Invalid API Token
+  You may see:
+  ```
+  401 Unauthorized
+  ```
+  which means
+  * API token incorrect
+  * environment variable missing
+
+    Check:
+    ```echo $STATUSCAKE_API_TOKEN```
+
+### Invalid URL
+  If the website URL is incorrect:
+  * monitor creation fails
+  * API returns validation error
+
+## Creating a monitor is one thing.
+Now we need to verify:
+whether monitoring actually behaves correctly, uptime checks work properly, and how the system reacts when services fail.
+
+That's another tale. so, let's cover it in next ----
